@@ -13,13 +13,10 @@ export class HomeComponent {
   constructor(private airPollutionService: AirPollutionService) {}
 
   getCurrentdata(): void {
-    if (this.city) {
+    if (this.city ) {
       this.airPollutionService.getCurrentData(this.city).subscribe(
-        (data) => {
-          this.airPollutionData = data;
-          console.log(data);
-        },
-        (error) => console.error('Error fetching data', error)
+        data => this.airPollutionData = data,
+        error => console.error('Error fetching data', error)
       );
     }
   }

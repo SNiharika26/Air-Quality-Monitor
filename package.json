@@ -18,11 +18,12 @@
     "@angular/platform-browser": "^16.2.0",
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.0",
+    "@types/highcharts": "^7.0.0",
     "angular-fusioncharts": "^4.1.1",
     "bootstrap": "^5.3.3",
     "fusioncharts": "^4.0.2",
     "highcharts": "^11.4.6",
-    "ng2-charts": "^6.0.1",
+    "highcharts-angular": "^4.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"

@@ -20,9 +20,14 @@
   </div>
 </div>
 <div>
-  <label for="current">Enter city to know current data:</label>
-  <input type="text" name="current" id="" />
-  <button (click)="getCurrentdata()">Find it</button>
+  <form (ngSubmit)="getCurrentdata()">
+  <div>
+    <label for="city">City:</label>
+    <input type="text" id="city" [(ngModel)]="city" name="city" required>
+  </div>
+ 
+  <button type="submit">Get Data</button>
+</form>
   <div *ngIf="airPollutionData.length">
     <table>
       <thead>

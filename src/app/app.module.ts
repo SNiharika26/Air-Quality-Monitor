@@ -9,6 +9,8 @@ import { FormsModule } from '@angular/forms';
 import { HistoryComponent } from './history/history.component';
 import { HomeComponent } from './home/home.component';
 
+import { HighchartsChartModule } from 'highcharts-angular'; 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +22,7 @@ import { HomeComponent } from './home/home.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    
+    HighchartsChartModule
     
   ],
   providers: [],
