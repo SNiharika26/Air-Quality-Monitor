@@ -17,7 +17,9 @@ import { HistoryComponent } from './history/history.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
