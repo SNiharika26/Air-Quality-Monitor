@@ -1,0 +1,94 @@
+@import "../styles/breakpoint.scss";
+.container {
+  font-family: Arial, sans-serif;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black;
+  padding: 1rem;
+
+  @include breakpoint-md {
+    padding: 2rem;
+  }
+  @include breakpoint-sm {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.logo {
+  color: white;
+  font-size: 1.5rem;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  @include breakpoint-sm {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-left: 0;
+  }
+}
+
+.nav-links li a {
+  color: white;
+  text-decoration: none;
+}
+
+.contact-button {
+  background-color: #d4a017;
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+
+  /* Example of using screen-lg mixin */
+  @include breakpoint-lg {
+    padding: 0.8rem 1.5rem;
+    font-size: 1.1rem;
+  }
+}
+
+.hero-section {
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+  justify-content: space-around;
+  /* Example of using multiple breakpoints */
+  @include breakpoint-sm {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  /* Example of using screen-lg mixin */
+  @include breakpoint-lg {
+    padding: 4rem;
+  }
+}
+
+.image-container img {
+  border-radius: 50%;
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+}
+
+.text-container {
+  margin-left: 2rem;
+}
+
+.text-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.text-container p {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}

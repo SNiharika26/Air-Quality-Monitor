@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+@function as-map($value) {
+  @if type-of($value) == map {
+    @return $value;
+  }
+
+  @return ($value);
+}
+
+@function string-multiply($str, $times) {
+  $updated: $str;
+  @for $index from 0 through $times - 1 {
+    $updated: string-append($updated, $str);
+  }
+
+  @return ($updated);
+}
+
+@function string-append($str, $str2) {
+  @return str-insert($str, $str2, str-length($str) + 1);
+}

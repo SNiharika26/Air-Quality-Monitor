@@ -1,0 +1,175 @@
+// :root {
+//   --breakpoint-sm: 640px;
+//   --breakpoint-md: 768px;
+//   --breakpoint-lg: 1024px;
+//   --breakpoint-xl: 1280px;
+// }
+
+// @mixin screen-sm {
+//   @media (min-width: var(--breakpoint-sm)) {
+//     @content;
+//   }
+// }
+
+// @mixin screen-md {
+//   @media (min-width: var(--breakpoint-md)) {
+//     @content;
+//   }
+// }
+
+// @mixin screen-lg {
+//   @media (min-width: var(--breakpoint-lg)) {
+//     @content;
+//   }
+// }
+
+// @mixin screen-xl {
+//   @media (min-width: var(--breakpoint-xl)) {
+//     @content;
+//   }
+// }
+@charset "UTF-8";
+@use "./functions.scss" as func;
+
+$breakpoint-sm: 488px; // mobile
+$breakpoint-md: 960px; // tablet
+$breakpoint-lg: 1440px; // laptop, desktop
+
+@mixin breakpoint-sm {
+  @media (max-width: $breakpoint-sm) {
+    @content;
+  }
+}
+
+@mixin breakpoint-md {
+  @media (min-width: ($breakpoint-sm + 1)) and (max-width: $breakpoint-md) {
+    @content;
+  }
+}
+
+@mixin breakpoint-from-md {
+  @media (min-width: ($breakpoint-sm + 1)) {
+    @content;
+  }
+}
+
+@mixin breakpoint-lg {
+  @media (min-width: ($breakpoint-md + 1)) and (max-width: $breakpoint-lg) {
+    @content;
+  }
+}
+
+@mixin breakpoint-from-lg {
+  @media (min-width: ($breakpoint-md + 1)) {
+    @content;
+  }
+}
+
+/// NOTE: Don't use this mixin for normal classes. only for atomic classes
+@mixin breakpoint-all {
+  $classes: ();
+  $classesSm: ();
+  $classesMd: ();
+  $classesLg: ();
+  $classesSmOnly: ();
+  $classesMdOnly: ();
+  $classesLgOnly: ();
+
+  @each $selector in & {
+    $class: nth($selector, length($selector));
+
+    $classes: func.join(
+      $classes,
+      selector-replace($selector, $class, string-multiply($class, 4))
+    );
+    $classesSm: func.join(
+      $classesSm,
+      selector-replace(
+        $selector,
+        $class,
+        string-multiply(string-append($class, "\\@sm"), 5)
+      )
+    );
+    $classesSmOnly: func.join(
+      $classesSmOnly,
+      selector-replace(
+        $selector,
+        $class,
+        string-multiply(string-append($class, "\\@sm-only"), 5)
+      )
+    );
+    $classesMd: func.join(
+      $classesMd,
+      selector-replace(
+        $selector,
+        $class,
+        string-multiply(string-append($class, "\\@md"), 6)
+      )
+    );
+    $classesMdOnly: func.join(
+      $classesMdOnly,
+      selector-replace(
+        $selector,
+        $class,
+        string-multiply(string-append($class, "\\@md-only"), 6)
+      )
+    );
+    $classesLg: func.join(
+      $classesLg,
+      selector-replace(
+        $selector,
+        $class,
+        string-multiply(string-append($class, "\\@lg"), 7)
+      )
+    );
+    $classesLgOnly: func.join(
+      $classesLgOnly,
+      selector-replace(
+        $selector,
+        $class,
+        string-multiply(string-append($class, "\\@lg-only"), 7)
+      )
+    );
+  }
+
+  // NOTE: To override existing styles
+  @at-root #{$classes} {
+    @content;
+  }
+
+  @at-root #{$classesSm} {
+    @include breakpoint-sm {
+      @content;
+    }
+  }
+
+  @at-root #{$classesMd} {
+    @include breakpoint-from-md {
+      @content;
+    }
+  }
+
+  @at-root #{$classesLg} {
+    @include breakpoint-from-lg {
+      @content;
+    }
+  }
+
+  @at-root #{$classesSmOnly} {
+    @include breakpoint-sm {
+      @content;
+    }
+  }
+
+  @at-root #{$classesMdOnly} {
+    @include breakpoint-md {
+      @content;
+    }
+  }
+
+  @at-root #{$classesLgOnly} {
+    @include breakpoint-lg {
+      @content;
+    }
+  }
+}
