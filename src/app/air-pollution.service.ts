@@ -10,12 +10,11 @@ export class AirPollutionService {
 
   constructor(private http: HttpClient) { }
 
-  getHistoricalData(city: string, startDate: string, endDate: string): Observable<any> {
-    const params = new HttpParams()
-      .set('city', city)
-      .set('startDate', startDate)
-      .set('endDate', endDate);
+  getCurrentData(city:string):Observable<any>{
+    return this.http.get(`${this.baseUrl}/current`, { params: { city } });
+  }
 
-    return this.http.get(`${this.baseUrl}/historical`, { params });
+  getHistoricalData(city: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/historical`, { params: { city } });
   }
 }

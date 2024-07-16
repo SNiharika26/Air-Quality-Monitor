@@ -9,15 +9,14 @@ import { AirPollutionService } from '../air-pollution.service';
 export class HistoryComponent implements OnInit {
   airPollutionData: any[] = [];
   city: string = '';
-  startDate: string = '';
-  endDate: string = '';
+  
 
   constructor(private airPollutionService: AirPollutionService) { }
 
   ngOnInit(): void {}
   getHistoricalData(): void {
-    if (this.city && this.startDate && this.endDate) {
-      this.airPollutionService.getHistoricalData(this.city, this.startDate, this.endDate).subscribe(
+    if (this.city ) {
+      this.airPollutionService.getHistoricalData(this.city).subscribe(
         data => this.airPollutionData = data,
         error => console.error('Error fetching data', error)
       );
