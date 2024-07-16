@@ -22,7 +22,36 @@
 <div>
   <label for="current">Enter city to know current data:</label>
   <input type="text" name="current" id="" />
-  <!-- <button (click)="getCurrentdata()">Find it</button> -->
+  <button (click)="getCurrentdata()">Find it</button>
+  <div *ngIf="airPollutionData.length">
+    <table>
+      <thead>
+        <tr>
+          <th>AQI</th>
+          <th>PM2.5</th>
+          <th>PM10</th>
+          <th>CO</th>
+          <th>NO2</th>
+          <th>SO2</th>
+          <th>O3</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of airPollutionData">
+          <td>{{ data.aqi }}</td>
+          <td>{{ data.pm25 }}</td>
+          <td>{{ data.pm10 }}</td>
+          <td>{{ data.co }}</td>
+          <td>{{ data.no2 }}</td>
+          <td>{{ data.so2 }}</td>
+          <td>{{ data.o3 }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="!airPollutionData.length">
+    <p>No data available</p>
+  </div>
 </div>
 
 <!-- <div class="container mx-auto p-4">
