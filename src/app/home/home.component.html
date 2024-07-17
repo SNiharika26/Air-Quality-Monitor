@@ -19,3 +19,82 @@
     </div>
   </div>
 </div>
+<div>
+  <form (ngSubmit)="getCurrentdata()">
+    <div>
+      <label for="city">City:</label>
+      <input type="text" id="city" [(ngModel)]="city" name="city" required />
+    </div>
+
+    <button type="submit">Get Data</button>
+  </form>
+  <div *ngIf="airPollutionData.length">
+    <table>
+      <thead>
+        <tr>
+          <th>AQI</th>
+          <th>PM2.5</th>
+          <th>PM10</th>
+          <th>CO</th>
+          <th>NO2</th>
+          <th>SO2</th>
+          <th>O3</th>
+          <th>Comment</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of airPollutionData">
+          <td>{{ data.aqi }}</td>
+          <td>{{ data.pm25 }}</td>
+          <td>{{ data.pm10 }}</td>
+          <td>{{ data.co }}</td>
+          <td>{{ data.no2 }}</td>
+          <td>{{ data.so2 }}</td>
+          <td>{{ data.o3 }}</td>
+          <h4>{{ generateComment() }}</h4>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="!airPollutionData.length">
+    <p>No data available</p>
+  </div>
+</div>
+
+<!-- <div class="container mx-auto p-4">
+  <nav class="navbar flex justify-between items-center bg-black p-4">
+    <div class="logo text-white text-xl">Air quality monitoring</div>
+    <ul class="nav-links flex gap-6">
+      <li><a href="#" class="text-white">Services</a></li>
+      <li><a href="#" class="text-white">Gallery</a></li>
+      <li>
+        <a
+          href="#"
+          class="contact-button bg-yellow-600 text-white py-2 px-4 rounded"
+          >Contact Us</a
+        >
+      </li>
+    </ul>
+  </nav>
+
+  <div class="hero-section flex flex-col md:flex-row items-center mt-8">
+    <div class="image-container">
+      <img
+        src="assets/industry-pollution.jpg"
+        alt="Industrial Pollution"
+        class="rounded-full w-64 h-64 md:w-80 md:h-80 object-cover mx-auto md:mx-0"
+      />
+    </div>
+    <div class="text-container md:ml-8 mt-4 md:mt-0 text-center md:text-left">
+      <h1 class="text-3xl md:text-4xl font-bold">Breathe Clean with Us</h1>
+      <p class="text-lg md:text-xl mt-2">
+        Protecting your air, ensuring your health.
+      </p>
+      <button
+        class="contact-button bg-yellow-600 text-white py-2 px-4 rounded mt-4"
+      >
+        Contact Us
+      </button>
+    </div>
+  </div>
+</div> -->
