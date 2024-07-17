@@ -6,18 +6,21 @@
       <label for="city">City:</label>
       <input type="text" id="city" [(ngModel)]="city" name="city" required>
     </div>
-   
-    <button type="submit">Get Data</button>
+    <button type="submit">Get Historical Data</button>
   </form>
 
-  <div *ngIf="airPollutionData.length">
+  <form (ngSubmit)="getForecastData()">
+    <button type="submit">Get Forecast Data</button>
+  </form>
+
+  <div *ngIf="airPollutionData.length || forecastData.length">
     <highcharts-chart
       [Highcharts]="Highcharts"
       [options]="chartOptions"
       style="width: 100%; height: 400px; display: block;">
     </highcharts-chart>
   </div>
-  <div *ngIf="!airPollutionData.length">
+  <div *ngIf="!airPollutionData.length && !forecastData.length">
     <p>No data available</p>
   </div>
 </div>

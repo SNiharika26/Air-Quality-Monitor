@@ -17,4 +17,7 @@ export class AirPollutionService {
   getHistoricalData(city: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/historical`, { params: { city } });
   }
+  getForecastData(city: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/forecast`, { params: { city } });
+  }
 }

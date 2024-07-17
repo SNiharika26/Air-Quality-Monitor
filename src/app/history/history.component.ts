@@ -9,6 +9,7 @@ import * as Highcharts from 'highcharts';
 })
 export class HistoryComponent implements OnInit {
   airPollutionData: any[] = [];
+  forecastData: any[] = [];
   city: string = '';
   Highcharts: typeof Highcharts = Highcharts;
   chartOptions: Highcharts.Options = {}; // Define chart options here
@@ -22,29 +23,44 @@ export class HistoryComponent implements OnInit {
       this.airPollutionService.getHistoricalData(this.city).subscribe(
         data => {
           this.airPollutionData = data;
-          this.initializeChart();
+          this.updateChart();
         },
         error => console.error('Error fetching data', error)
       );
     }
   }
 
-  initializeChart(): void {
+  getForecastData(): void {
+    if (this.city) {
+      this.airPollutionService.getForecastData(this.city).subscribe(
+        data => {
+          this.forecastData = data;
+          this.updateChart();
+        },
+        error => console.error('Error fetching data', error)
+      );
+    }
+  }
+
+  updateChart(): void {
+    const historicalSeries = this.mapDataToSeries(this.airPollutionData, 'Historical');
+    const forecastSeries = this.mapDataToSeries(this.forecastData, 'Forecast');
+
     this.chartOptions = {
       chart: {
-        type: 'line' // Specify the default type for the chart
+        type: 'line'
       },
       title: {
-        text: 'Historical Air Pollution Data'
+        text: 'Air Pollution Data'
       },
       xAxis: {
-        type: 'datetime', // Use 'datetime' for date/time values on x-axis
+        type: 'datetime',
         title: {
           text: 'Date'
         },
         labels: {
           formatter: function () {
-            return Highcharts.dateFormat('%Y-%m-%d', Number(this.value)); // Format labels to show only date
+            return Highcharts.dateFormat('%Y-%m-%d', Number(this.value));
           }
         }
       },
@@ -53,43 +69,47 @@ export class HistoryComponent implements OnInit {
           text: 'Pollution Level'
         }
       },
-      series: [
-        {
-          type: 'line', // Specify the type for AQI series
-          name: 'AQI',
-          data: this.airPollutionData.map(item => [new Date(item.date).getTime(), item.aqi]) // Map AQI data
-        },
-        {
-          type: 'line', // Specify the type for PM2.5 series
-          name: 'PM2.5',
-          data: this.airPollutionData.map(item => [new Date(item.date).getTime(), item.pm25]) // Map PM2.5 data
-        },
-        {
-          type: 'line', // Specify the type for PM10 series
-          name: 'PM10',
-          data: this.airPollutionData.map(item => [new Date(item.date).getTime(), item.pm10]) // Map PM10 data
-        },
-        {
-          type: 'line', // Specify the type for CO series
-          name: 'CO',
-          data: this.airPollutionData.map(item => [new Date(item.date).getTime(), item.co]) // Map CO data
-        },
-        {
-          type: 'line', // Specify the type for NO2 series
-          name: 'NO2',
-          data: this.airPollutionData.map(item => [new Date(item.date).getTime(), item.no2]) // Map NO2 data
-        },
-        {
-          type: 'line', // Specify the type for SO2 series
-          name: 'SO2',
-          data: this.airPollutionData.map(item => [new Date(item.date).getTime(), item.so2]) // Map SO2 data
-        },
-        {
-          type: 'line', // Specify the type for O3 series
-          name: 'O3',
-          data: this.airPollutionData.map(item => [new Date(item.date).getTime(), item.o3]) // Map O3 data
-        }
-      ]
+      series: [...historicalSeries, ...forecastSeries]
     };
+  }
+
+  mapDataToSeries(data: any[], type: string): Highcharts.SeriesOptionsType[] {
+    return [
+      {
+        type: 'line',
+        name: `${type} AQI`,
+        data: data.map(item => [new Date(item.date).getTime(), item.aqi])
+      },
+      {
+        type: 'line',
+        name: `${type} PM2.5`,
+        data: data.map(item => [new Date(item.date).getTime(), item.pm25])
+      },
+      {
+        type: 'line',
+        name: `${type} PM10`,
+        data: data.map(item => [new Date(item.date).getTime(), item.pm10])
+      },
+      {
+        type: 'line',
+        name: `${type} CO`,
+        data: data.map(item => [new Date(item.date).getTime(), item.co])
+      },
+      {
+        type: 'line',
+        name: `${type} NO2`,
+        data: data.map(item => [new Date(item.date).getTime(), item.no2])
+      },
+      {
+        type: 'line',
+        name: `${type} SO2`,
+        data: data.map(item => [new Date(item.date).getTime(), item.so2])
+      },
+      {
+        type: 'line',
+        name: `${type} O3`,
+        data: data.map(item => [new Date(item.date).getTime(), item.o3])
+      }
+    ];
   }
 }
