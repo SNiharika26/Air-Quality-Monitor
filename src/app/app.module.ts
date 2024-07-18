@@ -9,23 +9,28 @@ import { FormsModule } from '@angular/forms';
 import { HistoryComponent } from './history/history.component';
 import { HomeComponent } from './home/home.component';
 
-import { HighchartsChartModule } from 'highcharts-angular'; 
+import { HighchartsChartModule } from 'highcharts-angular';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import { AirQualityModalComponent } from './air-quality-modal/air-quality-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HistoryComponent,
-    HomeComponent
+    HomeComponent,
+    AirQualityModalComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    HighchartsChartModule
-    
+    HighchartsChartModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
