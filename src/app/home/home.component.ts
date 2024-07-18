@@ -10,52 +10,69 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
+  currentAirPollutionData: any[] = [];
   airPollutionData: any[] = [];
-  city: string = '';
+  forecastData: any[] = [];
+  currentCity: string = '';
+  historicCity: string = '';
+  forecastCity: string = '';
   Highcharts: typeof Highcharts = Highcharts;
   chartOptions: Highcharts.Options = {}; // Define chart options here
-  forecastData: any[] = [];
+  historicalChartOptions: Highcharts.Options = {}; // Define historical chart options
+  forecastChartOptions: Highcharts.Options = {}; // Define forecast chart options
 
   constructor(
     private airPollutionService: AirPollutionService,
     private dialog: MatDialog
   ) {}
 
-  getCurrentdata(): void {
-    if (this.city) {
-      this.airPollutionService.getCurrentData(this.city).subscribe(
-        (data) => (this.airPollutionData = data),
-        (error) => console.error('Error fetching data', error)
+  getCurrentData(): void {
+    if (this.currentCity) {
+      this.airPollutionService.getCurrentData(this.currentCity).subscribe(
+        (data) => (this.currentAirPollutionData = data),
+        (error) => console.error('Error fetching current data', error)
       );
     }
   }
+
   getHistoricalData(): void {
-    if (this.city) {
-      console.log(this.city);
-      this.airPollutionService.getHistoricalData(this.city).subscribe(
+    if (this.historicCity) {
+      this.airPollutionService.getHistoricalData(this.historicCity).subscribe(
         (data) => {
           this.airPollutionData = data;
-          this.updateChart();
+          this.updateHistoricalChart(); // Call the update function for historical chart
           this.openModal();
-          console.log(data);
         },
-        (error) => console.error('Error fetching data', error)
+        (error) => console.error('Error fetching historical data', error)
       );
     }
   }
-  updateChart(): void {
+
+  getForecastData(): void {
+    if (this.forecastCity) {
+      this.airPollutionService.getForecastData(this.forecastCity).subscribe(
+        (data) => {
+          this.forecastData = data;
+          this.updateForecastChart(); // Call the update function for forecast chart
+          this.openModal();
+        },
+        (error) => console.error('Error fetching forecast data', error)
+      );
+    }
+  }
+
+  updateHistoricalChart(): void {
     const historicalSeries = this.mapDataToSeries(
       this.airPollutionData,
       'Historical'
     );
-    const forecastSeries = this.mapDataToSeries(this.forecastData, 'Forecast');
 
-    this.chartOptions = {
+    this.historicalChartOptions = {
       chart: {
         type: 'line',
       },
       title: {
-        text: 'Air Pollution Data',
+        text: 'Historical Air Pollution Data',
       },
       xAxis: {
         type: 'datetime',
@@ -73,82 +90,40 @@ export class HomeComponent {
           text: 'Pollution Level',
         },
       },
-      series: [...historicalSeries, ...forecastSeries],
+      series: historicalSeries,
     };
   }
-  // generateComment(): string {
-  //   const AQI_THRESHOLD = 100;
-  //   const PM25_THRESHOLD = 35;
-  //   const PM10_THRESHOLD = 50;
-  //   const CO_THRESHOLD = 9;
-  //   const NO2_THRESHOLD = 53;
-  //   const SO2_THRESHOLD = 35;
-  //   const O3_THRESHOLD = 70;
 
-  //   const { aqi, pm25, pm10, co, no2, so2, o3 } = this.airPollutionData || {};
+  updateForecastChart(): void {
+    const forecastSeries = this.mapDataToSeries(this.forecastData, 'Forecast');
 
-  //   if (
-  //     aqi > AQI_THRESHOLD ||
-  //     pm25 > PM25_THRESHOLD ||
-  //     pm10 > PM10_THRESHOLD ||
-  //     co > CO_THRESHOLD ||
-  //     no2 > NO2_THRESHOLD ||
-  //     so2 > SO2_THRESHOLD ||
-  //     o3 > O3_THRESHOLD
-  //   ) {
-  //     return 'Bad air quality. Avoid outdoor activities.';
-  //   }
-  //   return 'Good air quality. Safe for outdoor activities.';
-  // }
-  generateComment(): string {
-    const AQI_THRESHOLD = 100;
-    const PM25_THRESHOLD = 35;
-    const PM10_THRESHOLD = 50;
-    const CO_THRESHOLD = 9;
-    const NO2_THRESHOLD = 53;
-    const SO2_THRESHOLD = 35;
-    const O3_THRESHOLD = 70;
-
-    let aqi = 0,
-      pm25 = 0,
-      pm10 = 0,
-      co = 0,
-      no2 = 0,
-      so2 = 0,
-      o3 = 0;
-
-    this.airPollutionData.forEach((dataPoint) => {
-      aqi += dataPoint.aqi || 0;
-      pm25 += dataPoint.pm25 || 0;
-      pm10 += dataPoint.pm10 || 0;
-      co += dataPoint.co || 0;
-      no2 += dataPoint.no2 || 0;
-      so2 += dataPoint.so2 || 0;
-      o3 += dataPoint.o3 || 0;
-    });
-
-    const count = this.airPollutionData.length;
-    aqi /= count;
-    pm25 /= count;
-    pm10 /= count;
-    co /= count;
-    no2 /= count;
-    so2 /= count;
-    o3 /= count;
-
-    if (
-      aqi > AQI_THRESHOLD ||
-      pm25 > PM25_THRESHOLD ||
-      pm10 > PM10_THRESHOLD ||
-      co > CO_THRESHOLD ||
-      no2 > NO2_THRESHOLD ||
-      so2 > SO2_THRESHOLD ||
-      o3 > O3_THRESHOLD
-    ) {
-      return 'Bad air quality. Avoid outdoor activities.';
-    }
-    return 'Good air quality. Safe for outdoor activities.';
+    this.forecastChartOptions = {
+      chart: {
+        type: 'line',
+      },
+      title: {
+        text: 'Forecasted Air Pollution Data',
+      },
+      xAxis: {
+        type: 'datetime',
+        title: {
+          text: 'Date',
+        },
+        labels: {
+          formatter: function () {
+            return Highcharts.dateFormat('%Y-%m-%d', Number(this.value));
+          },
+        },
+      },
+      yAxis: {
+        title: {
+          text: 'Pollution Level',
+        },
+      },
+      series: forecastSeries,
+    };
   }
+
   mapDataToSeries(data: any[], type: string): Highcharts.SeriesOptionsType[] {
     return [
       {
@@ -189,17 +164,35 @@ export class HomeComponent {
     ];
   }
 
-  getForecastData(): void {
-    if (this.city) {
-      this.airPollutionService.getForecastData(this.city).subscribe(
-        (data) => {
-          this.forecastData = data;
-          this.updateChart();
-          this.openModal();
-        },
-        (error) => console.error('Error fetching data', error)
-      );
+  generateComment(data: {
+    aqi: number;
+    pm25: number;
+    pm10: number;
+    co: number;
+    no2: number;
+    so2: number;
+    o3: number;
+  }): string {
+    const AQI_THRESHOLD = 100;
+    const PM25_THRESHOLD = 35;
+    const PM10_THRESHOLD = 50;
+    const CO_THRESHOLD = 9;
+    const NO2_THRESHOLD = 53;
+    const SO2_THRESHOLD = 35;
+    const O3_THRESHOLD = 70;
+
+    if (
+      data.aqi > AQI_THRESHOLD ||
+      data.pm25 > PM25_THRESHOLD ||
+      data.pm10 > PM10_THRESHOLD ||
+      data.co > CO_THRESHOLD ||
+      data.no2 > NO2_THRESHOLD ||
+      data.so2 > SO2_THRESHOLD ||
+      data.o3 > O3_THRESHOLD
+    ) {
+      return 'Bad air quality. Avoid outdoor activities.';
     }
+    return 'Good air quality. Safe for outdoor activities.';
   }
 
   openModal(): void {
