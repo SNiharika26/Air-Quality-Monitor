@@ -23,7 +23,6 @@
   <h2 class="section-title">Our Services</h2>
   <div class="services">
     <div class="service">
-      <img src="path/to/current-data-image.jpg" alt="Current Data" />
       <h3>Get Current Data</h3>
       <p>Retrieve and display current air quality data for a specific city.</p>
       <div class="input-group">
@@ -66,18 +65,15 @@
 
     <div class="service">
       <h3>Historical Data</h3>
-      <p>Retrieve and display historical air quality data for a specific city.</p>
+      <p>
+        Retrieve and display historical air quality data for a specific city.
+      </p>
       <div class="input-group">
         <label for="historicCity">City:</label>
         <input type="text" id="historicCity" [(ngModel)]="historicCity" />
         <button (click)="getHistoricalData()">Get Data</button>
       </div>
       <div *ngIf="airPollutionData.length">
-        <highcharts-chart
-          [Highcharts]="Highcharts"
-          [options]="historicalChartOptions"
-          style="width: 100%; height: 400px; display: block;">
-        </highcharts-chart>
         <div class="chart-description">
           <p>This chart displays historical air pollution data over time.</p>
         </div>
@@ -89,18 +85,15 @@
 
     <div class="service">
       <h3>Forecast Data</h3>
-      <p>Retrieve and display forecasted air quality data for a specific city.</p>
+      <p>
+        Retrieve and display forecasted air quality data for a specific city.
+      </p>
       <div class="input-group">
         <label for="forecastCity">City:</label>
         <input type="text" id="forecastCity" [(ngModel)]="forecastCity" />
         <button (click)="getForecastData()">Get Data</button>
       </div>
       <div *ngIf="forecastData.length">
-        <highcharts-chart
-          [Highcharts]="Highcharts"
-          [options]="forecastChartOptions"
-          style="width: 100%; height: 400px; display: block;">
-        </highcharts-chart>
         <div class="chart-description">
           <p>This chart displays forecasted air pollution data over time.</p>
         </div>

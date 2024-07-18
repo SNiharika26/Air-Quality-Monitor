@@ -8,6 +8,6 @@ body {
 body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.modal-open .cdk-overlay-container {
+  backdrop-filter: blur(5px); /* Blur effect */
+}

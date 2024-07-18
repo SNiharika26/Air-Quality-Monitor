@@ -41,7 +41,7 @@ export class HomeComponent {
         (data) => {
           this.airPollutionData = data;
           this.updateHistoricalChart(); // Call the update function for historical chart
-          this.openModal();
+          this.openModal(this.historicalChartOptions);
         },
         (error) => console.error('Error fetching historical data', error)
       );
@@ -54,7 +54,7 @@ export class HomeComponent {
         (data) => {
           this.forecastData = data;
           this.updateForecastChart(); // Call the update function for forecast chart
-          this.openModal();
+          this.openModal(this.forecastChartOptions);
         },
         (error) => console.error('Error fetching forecast data', error)
       );
@@ -195,9 +195,22 @@ export class HomeComponent {
     return 'Good air quality. Safe for outdoor activities.';
   }
 
-  openModal(): void {
-    this.dialog.open(AirQualityModalComponent, {
-      data: { chartOptions: this.chartOptions },
+  // openModal(chartOptions: Highcharts.Options): void {
+  //   this.dialog.open(AirQualityModalComponent, {
+  //     data: { chartOptions },
+  //   });
+  // }
+  openModal(chartOptions: Highcharts.Options): void {
+    document.body.classList.add('modal-open');
+    const dialogRef = this.dialog.open(AirQualityModalComponent, {
+      data: { chartOptions },
+      disableClose: true, // Prevent closing the modal by clicking outside
+      width: '80vw', // Adjust width as needed
+      height: 'auto', // Adjust height as needed
+      maxWidth: '90vw', // Ensure the modal doesn't exceed viewport width
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      document.body.classList.remove('modal-open');
     });
   }
 }
