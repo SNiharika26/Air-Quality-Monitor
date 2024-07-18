@@ -13,6 +13,9 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AirQualityModalComponent } from './air-quality-modal/air-quality-modal.component';
+import { MatButtonModule } from '@angular/material/button';
+import { CurrentAirQualityModalComponent } from './current-air-quality-modal/current-air-quality-modal.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -20,6 +23,7 @@ import { AirQualityModalComponent } from './air-quality-modal/air-quality-modal.
     HistoryComponent,
     HomeComponent,
     AirQualityModalComponent,
+    CurrentAirQualityModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,6 +33,8 @@ import { AirQualityModalComponent } from './air-quality-modal/air-quality-modal.
     HighchartsChartModule,
     BrowserAnimationsModule,
     MatDialogModule,
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent],

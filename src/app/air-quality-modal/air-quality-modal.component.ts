@@ -10,6 +10,7 @@ import * as Highcharts from 'highcharts';
 export class AirQualityModalComponent {
   Highcharts: typeof Highcharts = Highcharts;
   chartOptions: Highcharts.Options;
+  
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
     this.chartOptions = data.chartOptions;

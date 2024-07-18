@@ -30,34 +30,7 @@
         <input type="text" id="currentCity" [(ngModel)]="currentCity" />
         <button (click)="getCurrentData()">Get Data</button>
       </div>
-      <div *ngIf="currentAirPollutionData.length">
-        <table>
-          <thead>
-            <tr>
-              <th>AQI</th>
-              <th>PM2.5</th>
-              <th>PM10</th>
-              <th>CO</th>
-              <th>NO2</th>
-              <th>SO2</th>
-              <th>O3</th>
-              <th>Comment</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let data of currentAirPollutionData">
-              <td>{{ data.aqi }}</td>
-              <td>{{ data.pm25 }}</td>
-              <td>{{ data.pm10 }}</td>
-              <td>{{ data.co }}</td>
-              <td>{{ data.no2 }}</td>
-              <td>{{ data.so2 }}</td>
-              <td>{{ data.o3 }}</td>
-              <td>{{ generateComment(data) }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      
       <div *ngIf="!currentAirPollutionData.length">
         <p>No data available</p>
       </div>
