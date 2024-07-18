@@ -1,0 +1,64 @@
+<div class="modal-content">
+    <h2 mat-dialog-title>Air Quality Data</h2>
+    <div mat-dialog-content>
+      <div *ngIf="currentAirPollutionData.length > 0; else noData">
+        <div class="data-row" *ngFor="let data of currentAirPollutionData">
+          <div class="data-item">
+            <mat-icon class="data-icon">poll</mat-icon>
+            <div class="data-label">AQI:</div>
+            <div class="data-value">{{ data.aqi }}</div>
+          </div>
+          
+          <div class="data-item">
+            <mat-icon class="data-icon">blur_on</mat-icon>
+            <div class="data-label">PM2.5:</div>
+            <div class="data-value">{{ data.pm25 }}</div>
+          </div>
+          
+          <div class="data-item">
+            <mat-icon class="data-icon">brightness_5</mat-icon>
+            <div class="data-label">PM10:</div>
+            <div class="data-value">{{ data.pm10 }}</div>
+          </div>
+          
+          <div class="data-item">
+            <mat-icon class="data-icon">cloud</mat-icon>
+            <div class="data-label">CO:</div>
+            <div class="data-value">{{ data.co }}</div>
+          </div>
+          
+          <div class="data-item">
+            <mat-icon class="data-icon">waves</mat-icon>
+            <div class="data-label">NO2:</div>
+            <div class="data-value">{{ data.no2 }}</div>
+          </div>
+          
+          <div class="data-item">
+            <mat-icon class="data-icon">filter_drama</mat-icon>
+            <div class="data-label">SO2:</div>
+            <div class="data-value">{{ data.so2 }}</div>
+          </div>
+          
+          <div class="data-item">
+            <mat-icon class="data-icon">wb_sunny</mat-icon>
+            <div class="data-label">O3:</div>
+            <div class="data-value">{{ data.o3 }}</div>
+          </div>
+    
+          <div class="data-item">
+            <mat-icon class="data-icon">comment</mat-icon>
+            <div class="data-label">Comment:</div>
+            <div class="data-value">{{ generateComment(data) }}</div>
+          </div>
+        </div>
+      </div>
+      <ng-template #noData>
+        <p>No data available</p>
+      </ng-template>
+    </div>
+    
+    <div mat-dialog-actions>
+      <button mat-button mat-dialog-close>Close</button>
+    </div>
+  </div>
+  

@@ -1,0 +1,27 @@
+.modal-content {
+    width: 400px; /* Adjust width as needed */
+    padding: 20px;
+    border:2px solid #d4a017;
+  }
+  
+  .data-row {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .data-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .data-label {
+    font-weight: bold;
+    width: 100px; /* Adjust width as needed */
+  }
+  
+  .data-icon {
+    font-size: 20px;
+  }
+  
