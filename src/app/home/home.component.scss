@@ -181,6 +181,9 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
+.service:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 0 15px rgba(231, 53, 53, 0.5); /* Added spread for even shadow */
+}
 
 .service img {
   width: 100%;
@@ -205,6 +208,14 @@
   justify-content: center;
   gap: 10px;
   margin-bottom: 20px;
+  @include breakpoint-sm {
+    flex-direction: column;
+    gap: 5px;
+  }
+  @include breakpoint-md {
+    flex-direction: column;
+    gap: 8px;
+  }
 }
 
 .input-group label {
