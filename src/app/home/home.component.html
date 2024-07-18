@@ -26,11 +26,15 @@
       <h3>Get Current Data</h3>
       <p>Retrieve and display current air quality data for a specific city.</p>
       <div class="input-group">
-        <label for="currentCity">City:</label>
-        <input type="text" id="currentCity" [(ngModel)]="currentCity" />
+        <input
+          type="text"
+          id="currentCity"
+          [(ngModel)]="currentCity"
+          placeholder="Enter city"
+        />
         <button (click)="getCurrentData()">Get Data</button>
       </div>
-      
+
       <div *ngIf="!currentAirPollutionData.length">
         <p>No data available</p>
       </div>
@@ -42,8 +46,12 @@
         Retrieve and display historical air quality data for a specific city.
       </p>
       <div class="input-group">
-        <label for="historicCity">City:</label>
-        <input type="text" id="historicCity" [(ngModel)]="historicCity" />
+        <input
+          type="text"
+          id="historicCity"
+          [(ngModel)]="historicCity"
+          placeholder="Enter city"
+        />
         <button (click)="getHistoricalData()">Get Data</button>
       </div>
       <div *ngIf="airPollutionData.length">
@@ -63,7 +71,12 @@
       </p>
       <div class="input-group">
         <label for="forecastCity">City:</label>
-        <input type="text" id="forecastCity" [(ngModel)]="forecastCity" />
+        <input
+          type="text"
+          id="forecastCity"
+          [(ngModel)]="forecastCity"
+          placeholder="Enter city"
+        />
         <button (click)="getForecastData()">Get Data</button>
       </div>
       <div *ngIf="forecastData.length">
@@ -77,3 +90,32 @@
     </div>
   </div>
 </div>
+<div id="QuoteBanner" class="clean-container f1hx8b4t">
+  <div>
+    <div class="inside-clean">
+      <h2>Breathe easy with clean air monitoring!</h2>
+      <div>Breathe better today!</div>
+    </div>
+  </div>
+</div>
+<div id="ImageBanner">
+  <div class="">
+    <div aria-label="person holding man's face">
+      <img src="" alt="" />
+    </div>
+  </div>
+</div>
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-content">
+      <div class="footer-left">
+        <h3>Air quality monitoring</h3>
+        <p>&copy; 2024 Air quality monitoring</p>
+      </div>
+      <div class="footer-right">
+        <p>Made with</p>
+        <img src="path/to/solo-logo.png" alt="Solo Logo" class="solo-logo" />
+      </div>
+    </div>
+  </div>
+</footer>

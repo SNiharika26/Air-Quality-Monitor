@@ -65,7 +65,6 @@
     flex-direction: column;
     text-align: center;
   }
-
   /* Example of using screen-lg mixin */
   @include breakpoint-lg {
     padding: 4rem;
@@ -74,8 +73,8 @@
 
 .image-container img {
   border-radius: 50%;
-  width: 300px;
-  height: 300px;
+  width: 400px;
+  height: 400px;
   object-fit: cover;
 }
 
@@ -158,7 +157,8 @@
 
 .services-section {
   text-align: center;
-  margin: 40px 0;
+  padding: 1rem 0;
+  background-color: #fafaf9;
 }
 
 .section-title {
@@ -170,16 +170,23 @@
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+  @include breakpoint-sm {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .service {
   width: 30%;
-  border: 2px solid #d4a017; 
+  border: 2px solid #d4a017;
   border-radius: 10px;
   padding: 20px;
   margin: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   text-align: center;
+  @include breakpoint-sm {
+    width: 50%;
+  }
 }
 .service:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 0 15px rgba(231, 53, 53, 0.5); /* Added spread for even shadow */
@@ -226,6 +233,9 @@
   padding: 5px;
   font-size: 16px;
   width: 150px;
+  @include breakpoint-sm {
+    width: 100px;
+  }
 }
 
 .input-group button {
@@ -236,7 +246,7 @@
   border: none;
   color: white;
   padding: 0.5rem 1rem;
- 
+
   border-radius: 4px;
 }
 
@@ -264,4 +274,74 @@ tbody tr:nth-child(even) {
 .modal-open .cdk-overlay-container {
   backdrop-filter: blur(5px); /* Blur effect */
   background-color: rgba(255, 255, 255, 0.5);
+}
+.sub-heading {
+  background-color: #44403c;
+  color: #e7e5e4 !important;
+}
+.clean-container {
+  background-color: #44403c;
+  color: #e7e5e4 !important;
+}
+.inside-clean {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 64px 0;
+  margin: 0 85px;
+}
+/* General footer styles */
+.footer {
+  background-color: #000;
+  color: #fff;
+  padding: 1rem 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Container to align content */
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Flexbox to arrange items */
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Styles for the left side of the footer */
+.footer-left {
+  text-align: left;
+}
+
+.footer-left h3 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.footer-left p {
+  margin: 5px 0 0;
+  font-size: 14px;
+}
+
+/* Styles for the right side of the footer */
+.footer-right {
+  display: flex;
+  align-items: center;
+}
+
+.footer-right p {
+  margin: 0;
+  font-size: 14px;
+  margin-right: 8px;
+}
+
+.solo-logo {
+  width: 50px;
+  height: auto;
 }
