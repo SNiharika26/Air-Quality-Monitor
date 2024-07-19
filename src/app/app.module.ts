@@ -16,7 +16,10 @@ import { AirQualityModalComponent } from './air-quality-modal/air-quality-modal.
 import { MatButtonModule } from '@angular/material/button';
 import { CurrentAirQualityModalComponent } from './current-air-quality-modal/current-air-quality-modal.component';
 import { MatIconModule } from '@angular/material/icon';
-
+import { ContactUsModalComponent } from './contact-us-modal/contact-us-modal.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSnackBarModule } from '@angular/material/snack-bar'; 
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +27,7 @@ import { MatIconModule } from '@angular/material/icon';
     HomeComponent,
     AirQualityModalComponent,
     CurrentAirQualityModalComponent,
+    ContactUsModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +38,10 @@ import { MatIconModule } from '@angular/material/icon';
     BrowserAnimationsModule,
     MatDialogModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule, 
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent],

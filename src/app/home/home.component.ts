@@ -4,6 +4,7 @@ import * as Highcharts from 'highcharts';
 import { AirQualityModalComponent } from '../air-quality-modal/air-quality-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { CurrentAirQualityModalComponent } from '../current-air-quality-modal/current-air-quality-modal.component';
+import { ContactUsModalComponent } from '../contact-us-modal/contact-us-modal.component';
 
 @Component({
   selector: 'app-home',
@@ -190,6 +191,11 @@ export class HomeComponent {
   openCurrentModal(): void {
     this.dialog.open(CurrentAirQualityModalComponent, {
       data: { currentAirPollutionData: this.currentAirPollutionData },
+    });
+  }
+  openContactUsModal(): void {
+    this.dialog.open(ContactUsModalComponent, {
+      width: '300px'
     });
   }
 }

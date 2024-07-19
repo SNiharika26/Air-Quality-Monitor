@@ -1,0 +1,30 @@
+<!-- src/app/contact-us-modal/contact-us-modal.component.html -->
+<div class="modal-container">
+    <div class="modal-header">
+      <h2 mat-dialog-title>Contact Us</h2>
+      <button mat-icon-button class="close-icon" (click)="onClose()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <form (ngSubmit)="onSubmit(contactForm)" #contactForm="ngForm" class="contact-form">
+      <mat-form-field class="full-width">
+        <mat-label>Name</mat-label>
+        <input matInput type="text" name="name" ngModel placeholder="Name" required>
+      </mat-form-field>
+  
+      <mat-form-field class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" name="email" ngModel placeholder="Email" required>
+      </mat-form-field>
+  
+      <mat-form-field class="full-width">
+        <mat-label>Message</mat-label>
+        <textarea matInput name="message" ngModel placeholder="Message" required></textarea>
+      </mat-form-field>
+  
+      <div class="button-group">
+        <button mat-button class="mat-raised-button"  type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+  
