@@ -60,13 +60,11 @@
   align-items: center;
   padding: 2rem;
   justify-content: space-around;
-  /* Example of using multiple breakpoints */
   @include breakpoint-sm {
     flex-direction: column;
     text-align: center;
   }
-  /* Example of using screen-lg mixin */
-  @include breakpoint-lg {
+  @include breakpoint-from-lg {
     padding: 4rem;
   }
 }
@@ -344,4 +342,20 @@ tbody tr:nth-child(even) {
 .solo-logo {
   width: 50px;
   height: auto;
+}
+
+///animation
+@keyframes slideIn {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-entry {
+  animation: slideIn 2s ease-out;
 }
