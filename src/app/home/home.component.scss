@@ -60,13 +60,11 @@
   align-items: center;
   padding: 2rem;
   justify-content: space-around;
-  /* Example of using multiple breakpoints */
   @include breakpoint-sm {
     flex-direction: column;
     text-align: center;
   }
-  /* Example of using screen-lg mixin */
-  @include breakpoint-lg {
+  @include breakpoint-from-lg {
     padding: 4rem;
   }
 }
