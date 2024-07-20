@@ -190,8 +190,6 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 0 15px rgba(231, 53, 53, 0.5); /* Added spread for even shadow */
 }
 
-
-
 .service h3 {
   font-size: 24px;
   margin-bottom: 10px;
@@ -344,4 +342,17 @@ tbody tr:nth-child(even) {
   margin-right: 8px;
 }
 
+@keyframes slideIn {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 
+.animate-entry {
+  animation: slideIn 2s ease-out;
+}
